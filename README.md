@@ -1,29 +1,29 @@
-#MessageBox Service Abstraction
+# MessageBox Service Abstraction
 Abstracting the `MessageBox` class into an interface primarily for aiding dependency injection and improving testability.
 
-###Getting Started
+### Getting Started
 1. Download and extract the files.
 2. Copy the files or add the contents of the files into your project.
 3. Rename the `namespace` to match your project's namespace.
 
-##Code Example
+## Code Example
 The `IMessageBoxService` interface is an abstraction for the `MessageBox` class, you should no longer call the `MessageBox` 
 class to display dialogs, instead, create an instance of `MessageBoxService` and call the `Show` methods. 
 
 Here is a very simple example:
 
-```
+```cs
 IMessageBoxService service = new MessageBoxService();
 
 service.Show("Hello World!");
 ```
 
-##Dependency Injection
+## Dependency Injection
 The purpose of the abstraction is to aid dependency injection for classes which require a `IMessageBoxService`.
 
 Here is an example of using dependency injection with `Unity`:
 
-```
+```cs
 using Microsoft.Practices.Unity;
 ...
 
@@ -38,7 +38,7 @@ awesome.Say("It Worked!");
 
 Where `MyAwesomeClass` looks like this:
 
-```
+```cs
 public class MyAwesomeClass
 {
     readonly IMessageBoxService _MessageBoxService;
@@ -55,13 +55,13 @@ public class MyAwesomeClass
 }
 ```
 
-##What about testing?
+## What about testing?
 When testing your classes, you should inject a **fake** `IMessageBoxService` into your class' constructors. This will ensure that no
 *real* message box dialogs are displayed when testing your classes.
 
 Here is an example using `NSubstitite`:
 
-```
+```cs
 using NSubstitute;
 using System.Windows;
 ...
@@ -77,5 +77,5 @@ MyAwesomeClass awesome = new MyAwesomeClass(fakeService);
 awesome.Say(hello);
 ```
 
-##License
+## License
 This project is under the MIT license.
